@@ -2,12 +2,12 @@ import React from 'react';
 
 const testimonials = [
   {
-    name: 'John Doe',
+    name: 'Ram',
     role: 'Farmer',
     message: 'Agrotechh has transformed the way I do business. I now have guaranteed buyers for my produce!',
   },
   {
-    name: 'Jane Smith',
+    name: 'Lakhan',
     role: 'Buyer',
     message: 'Finding reliable suppliers has never been easier. The platform’s features make the process seamless.',
   },

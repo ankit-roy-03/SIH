@@ -7,9 +7,14 @@ import LoginPage from './components/pages/LoginPage';
 import Dashboard from './components/Dashboard.js/Dashboard';
 import UserProfile from './components/Dashboard.js/UserProfile'
 import ListProduct from './components/ListProduct/ListProduct';
-import Buyer from './components/ListProduct/Buyer';   
+import Buyer from './components/pages/product';   
 import BuyProduct from './components/ListProduct/BuyProduct';
 import ContractNegotiation from './components/ListProduct/ContractNegotiation';
+import SecureContract from './components/ListProduct/securecontract';
+import AboutUs from './components/pages/AboutUs';
+import TimelyPayment from './components/pages/TimelyPayment';
+import AdminPanel from './components/pages/AdminPanel';
+import Contact from './components/pages/contact';
 
 
 function App() {
@@ -30,6 +35,13 @@ function App() {
           <Route path="/Buyer" element={<Buyer />} />
           <Route path="/BuyProduct" element={<BuyProduct />} />
           <Route path="/ContractNegotiation" element={<ContractNegotiation />} />
+          <Route path="/SecureContract" element={<SecureContract />} />
+          <Route path="/AboutUs" element={<AboutUs />} />
+          <Route path="/TimelyPayment" element={<TimelyPayment/>} />
+          <Route path="/contact" element={<Contact/>} />
+          <Route path="/AdminPanel" element={<AdminPanel/>} />
+          
+          
           {/*
         */}
         </Routes>

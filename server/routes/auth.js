@@ -1,9 +1,11 @@
 const express = require('express');
-const router = express.Router();
-const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 const generateToken = require('../middleware/generateToken'); // Correct path
-const authMiddleware = require('../middleware/authMiddleware')
+const authMiddleware = require('../middleware/authMiddleware');
+const User = require('../models/User');
+const Contract = require('../models/Contract');
+
+const router = express.Router();
 
 // Register route
 router.post('/register', async (req, res) => {
@@ -21,7 +23,7 @@ router.post('/register', async (req, res) => {
       name,
       email,
       password,
-      userType
+      userType,
     });
 
     // Encrypt password
@@ -66,30 +68,25 @@ router.post('/login', async (req, res) => {
   }
 });
 
-
-
 // Get user profile
-// Get user profile// Ensure you have this route in your backend to handle profile retrieval
 router.get('/profile', authMiddleware, async (req, res) => {
   try {
     const user = await User.findById(req.user.id).select('-password');
-    
+
     if (!user) {
       return res.status(404).json({ msg: 'User not found' });
     }
 
     res.json({
-      id: user.shortId, // Include the short numeric ID
+      id: user.shortId,
       name: user.name,
-      email: user.email
+      email: user.email,
     });
   } catch (error) {
     console.error(error.message);
     res.status(500).send('Server error');
   }
 });
-
-
 
 // Update user profile
 router.put('/update-profile', authMiddleware, async (req, res) => {
@@ -111,6 +108,70 @@ router.put('/update-profile', authMiddleware, async (req, res) => {
   } catch (error) {
     console.error(error.message);
     res.status(500).send('Server error');
+  }
+});
+
+// Contract routes
+// Create a new contract
+router.post('/contracts', authMiddleware, async (req, res) => {
+  try {
+    const contract = new Contract(req.body);
+    await contract.save();
+    res.status(201).json(contract);
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to create contract' });
+  }
+});
+
+// Get all contracts
+router.get('/contracts', authMiddleware, async (req, res) => {
+  try {
+    const contracts = await Contract.find();
+    res.status(200).json(contracts);
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to fetch contracts' });
+  }
+});
+
+// Get a contract by ID
+router.get('/contracts/:id', authMiddleware, async (req, res) => {
+  try {
+    const contract = await Contract.findById(req.params.id);
+    if (contract) {
+      res.status(200).json(contract);
+    } else {
+      res.status(404).json({ error: 'Contract not found' });
+    }
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to fetch contract' });
+  }
+});
+
+// Update a contract by ID
+router.put('/contracts/:id', authMiddleware, async (req, res) => {
+  try {
+    const contract = await Contract.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    if (contract) {
+      res.status(200).json(contract);
+    } else {
+      res.status(404).json({ error: 'Contract not found' });
+    }
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to update contract' });
+  }
+});
+
+// Delete a contract by ID
+router.delete('/contracts/:id', authMiddleware, async (req, res) => {
+  try {
+    const contract = await Contract.findByIdAndDelete(req.params.id);
+    if (contract) {
+      res.status(204).send();
+    } else {
+      res.status(404).json({ error: 'Contract not found' });
+    }
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to delete contract' });
   }
 });
 

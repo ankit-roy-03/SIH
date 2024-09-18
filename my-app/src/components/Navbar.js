@@ -71,13 +71,13 @@ function Navbar() {
               </Link>
             </>
           )}
-          <Link to="/about" className="block px-4 py-2 hover:bg-beige hover:text-green">
+          <Link to="/AboutUs" className="block px-4 py-2 hover:bg-beige hover:text-green">
             About
           </Link>
           <Link to="/contact" className="block px-4 py-2 hover:bg-beige hover:text-green">
             Contact
           </Link>
-          <Link to="/admin" className="block px-4 py-2 hover:bg-beige hover:text-green">
+          <Link to="/AdminPanel" className="block px-4 py-2 hover:bg-beige hover:text-green">
             Admin
           </Link>
         </div>

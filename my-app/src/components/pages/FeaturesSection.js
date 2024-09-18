@@ -3,10 +3,16 @@ import { Link } from 'react-router-dom';
 
 const features = [
   {
+    title: 'Product',
+    description: 'Ensure reliable agreements with digital contract management.',
+    icon: '📦',
+    link: '/Buyer',
+  },
+  {
     title: 'Secure Contracts',
     description: 'Ensure reliable agreements with digital contract management.',
     icon: '📄',
-    link: '/secure-contracts',
+    link: '/securecontract',
   },
   {
     title: 'Price Negotiation',
@@ -26,13 +32,19 @@ const features = [
     icon: '💵',
     link: '/timely-payments',
   },
+  {
+    title: 'Product Listing',
+    description: 'Easily list your products for potential buyers to view and purchase.',
+    icon: '🛒',
+    link: '/listproduct',
+  },
 ];
 
 function FeaturesSection() {
   return (
     <section className="py-16 px-8 bg-lightgreen" id="features">
       <h2 className="text-3xl font-extrabold text-center mb-12 text-maingreen">Platform Features</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {features.map((feature, index) => (
           <Link
             key={index}
